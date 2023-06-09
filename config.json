@@ -1,0 +1,17 @@
+{
+  "base": "EUR",
+  "access_key": "87d0ec231ad6def8c182c4165c6c1609",
+  "symbols": [
+    "GBP",
+    "JPY",
+    "USD",
+    "GEL",
+    "OMR"
+  ],
+  "PROJECT_ID": "historical-exchange-rate",
+  "BUCKET_NAME": "store-rates-csv",
+  "DATASET_ID": "historical-exchange-rate.exchange_rates",
+  "TABLE_ID": "historical-exchange-rate.exchange_rates.currency-exchange",
+  "MAIN_FUN_URL": "us-central1-historical-exchange-rate.cloudfunctions.net/main",
+  "KEY": "/home/kote/Downloads/historical-exchange-rate-83cbcd633a7c.json"
+}

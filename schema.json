@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Date",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "Currency",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "Rate",
+    "type": "FLOAT",
+    "mode": "REQUIRED"
+  }
+]
