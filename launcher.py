@@ -20,7 +20,7 @@ def launcher():
     try:
         config_file = load_config()
         client = bigquery.Client.from_service_account_json(config_file['KEY'])
-        current_time = datetime.now()
+        current_time = datetime.now()  # current date time
         curr_date = current_time.strftime("%Y-%m-%d-%H")
         query = f"SELECT count(*) from '{config_file['TABLE_ID']}' WHERE extract(Date from Date)={curr_date}"
         query_job = client.query(query)
