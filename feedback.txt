@@ -1,0 +1,13 @@
+The major issues in code:
+
+1)No requirements.txt file in repo (This is a must have!)
+
+2)Critical security issue: exposed access key! (This is absolutely unacceptable!) also service account key file location must be relative path not absolute
+
+3)There are some hardcoded lines there and some, which should be hardcoded as constant - are not
+(Ref: launcher.py)
+
+4)Too broad exception clause nearly everywhere in code (Read this: https://pylint.readthedocs.io/en/latest/user_guide/messages/warning/broad-exception-raised.html)
+
+5)No comments, documentation or any type hints; This makes code reader thinks that code is written by very newbie(In terms, it is, but you can do better, definitely)
+p.s. bonus tip: use logging module for logging and debugging; The soon you avoid using print statement you better
