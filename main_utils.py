@@ -5,6 +5,10 @@ from google.cloud import bigquery
 from google.cloud import storage
 import json
 
+"""
+module for main cloud function to retrieve raw data, transform it and write it into bucket and bigquery table
+"""
+
 
 class RatesHandler:
     def __init__(self):
@@ -15,6 +19,10 @@ class RatesHandler:
 
     @staticmethod
     def get_config():
+        """
+        reads file from bucket to use it as a config file
+        :return: dict: a dictionary representing key values to use in cloud functions
+        """
         storage_client = storage.Client.from_service_account_json(
             "/home/kote/Downloads/historical-exchange-rate-83cbcd633a7c.json")
         bucket = storage_client.get_bucket("store_config_bucket1")
@@ -25,6 +33,11 @@ class RatesHandler:
         return out_file
 
     def get_api(self):
+        """
+        requests api from exchangeratesapi
+        :return:
+        file:A file object representing the API response.
+        """
         try:
             # symbols = ["GBP", "JPY", "USD", "GEL", "OMR"]
             url = f"http://api.exchangeratesapi.io/v1/latest?base=" \
@@ -37,6 +50,11 @@ class RatesHandler:
             print("error", e)
 
     def convert_data_to_csv(self):
+        """
+        converts data from api into a csv file
+        :return:
+        file: a file object representing csv file
+        """
         try:
             response = self.get_api()
             data = response.json()["rates"]
@@ -63,6 +81,8 @@ class RatesHandler:
             print(f"Failed to convert json into csv: ", str(e))
 
     def write_csv_to_buket(self):
+        """ writes csv file to a gcp bucket """
+
         try:
             file_name = self.convert_data_to_csv()
             client = storage.Client.from_service_account_json(self.config['KEY'])
@@ -73,6 +93,7 @@ class RatesHandler:
             print(f"to write to bucket", str(e))
 
     def write_to_bq_table(self):
+        """ writes csv file to a bigquery table from a bucket """
         try:
             with open("schema.json", "r") as f:
                 schema = json.load(f)
@@ -94,5 +115,3 @@ class RatesHandler:
                 print('Error loading data:', load_job.errors)
         except Exception as e:
             print(f"Failed to load data into table", {str(e)})
-
-

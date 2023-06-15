@@ -6,6 +6,8 @@ from datetime import datetime
 
 
 def load_config():
+    """loading config file from a gcp bucket"""
+
     storage_client = storage.Client.from_service_account_json(
         "/home/kote/Downloads/historical-exchange-rate-83cbcd633a7c.json")
     bucket = storage_client.get_bucket("store_config_bucket1")
@@ -17,6 +19,8 @@ def load_config():
 
 
 def launcher():
+    """launcher function to trigger main function if needed"""
+
     try:
         config_file = load_config()
         client = bigquery.Client.from_service_account_json(config_file['KEY'])

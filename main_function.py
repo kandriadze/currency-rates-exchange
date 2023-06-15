@@ -1,5 +1,7 @@
 from main_utils import RatesHandler
 
+'''functions to call class methods from main_utils.py'''
+
 
 def main_function():
     obj = RatesHandler()

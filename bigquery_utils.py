@@ -1,6 +1,8 @@
 from google.cloud import bigquery
 import json
 
+"""python module to work with bigquerytable"""
+
 
 class BigqueryTable:
     def __init__(self, config_file: json):
@@ -11,13 +13,14 @@ class BigqueryTable:
         self.client = self.get_client()
 
     def get_client(self) -> bigquery.Client:
+        """ establish a client connection to table"""
         client = bigquery.Client.from_service_account_json(self.key_path)
         return client
 
     def create_bq_table(self, schema_file: json) -> None:
+        """function to create a table"""
+
         with open(schema_file, 'r') as f:
             schema = json.load(f)
         table_config = bigquery.Table(self.table_id, schema=schema)
         self.client.create_table(table_config, exists_ok=True)
-
-
